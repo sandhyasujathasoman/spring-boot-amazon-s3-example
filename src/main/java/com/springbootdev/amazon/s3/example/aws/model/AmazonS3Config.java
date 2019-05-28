@@ -1,6 +1,5 @@
 package com.springbootdev.amazon.s3.example.aws.model;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -11,43 +10,45 @@ import com.amazonaws.regions.Region;
 import com.amazonaws.regions.Regions;
 
 @Configuration
-public class AmazonS3Config
-{
-    @Value("${aws.access.key.id}")
-    private String awsKeyId;
+public class AmazonS3Config {
+	/*
+	 * @Value("${aws.access.key.id}") private String awsKeyId;
+	 * 
+	 * @Value("${aws.access.key.secret}") private String awsKeySecret;
+	 * 
+	 * @Value("${aws.region}") private String awsRegion;
+	 * 
+	 * @Value("${aws.s3.audio.bucket}") private String awsS3AudioBucket;
+	 */
 
-    @Value("${aws.access.key.secret}")
-    private String awsKeySecret;
+	private String awsKeyId = System.getenv("S3_AWS_ACCESS_KEY_ID");
+	private String awsKeySecret = System.getenv("S3_AWS_SECRET_ACCESS_KEY");
+	private String awsRegion = System.getenv("aws.region");
+	private String awsS3AudioBucket = System.getenv("BUCKET_NAME");
 
-    @Value("${aws.region}")
-    private String awsRegion;
+	@Bean(name = "awsKeyId")
+	public String getAWSKeyId() {
+		return awsKeyId;
+	}
 
-    @Value("${aws.s3.audio.bucket}")
-    private String awsS3AudioBucket;
+	@Bean(name = "awsKeySecret")
+	public String getAWSKeySecret() {
+		return awsKeySecret;
+	}
 
-    @Bean(name = "awsKeyId")
-    public String getAWSKeyId() {
-        return awsKeyId;
-    }
+	@Bean(name = "awsRegion")
+	public Region getAWSPollyRegion() {
+		return Region.getRegion(Regions.fromName(awsRegion));
+	}
 
-    @Bean(name = "awsKeySecret")
-    public String getAWSKeySecret() {
-        return awsKeySecret;
-    }
+	@Bean(name = "awsCredentialsProvider")
+	public AWSCredentialsProvider getAWSCredentials() {
+		BasicAWSCredentials awsCredentials = new BasicAWSCredentials(this.awsKeyId, this.awsKeySecret);
+		return new AWSStaticCredentialsProvider(awsCredentials);
+	}
 
-    @Bean(name = "awsRegion")
-    public Region getAWSPollyRegion() {
-        return Region.getRegion(Regions.fromName(awsRegion));
-    }
-
-    @Bean(name = "awsCredentialsProvider")
-    public AWSCredentialsProvider getAWSCredentials() {
-        BasicAWSCredentials awsCredentials = new BasicAWSCredentials(this.awsKeyId, this.awsKeySecret);
-        return new AWSStaticCredentialsProvider(awsCredentials);
-    }
-
-    @Bean(name = "awsS3AudioBucket")
-    public String getAWSS3AudioBucket() {
-        return awsS3AudioBucket;
-    }
+	@Bean(name = "awsS3AudioBucket")
+	public String getAWSS3AudioBucket() {
+		return awsS3AudioBucket;
+	}
 }
