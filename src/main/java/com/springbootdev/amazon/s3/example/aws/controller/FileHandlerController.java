@@ -39,7 +39,8 @@ public class FileHandlerController {
     @RequestMapping("/")
     public String welcomeMessage() {
     	String name=  System.getenv("BUCKET_NAME");
-		return "Welcome to Service Broker Demo. Bucket Name is: "+name;
+    	System.out.println("Bucket Name is: "+name);
+		return "Welcome to Service Broker Demo." ;
     	
     }
 }
