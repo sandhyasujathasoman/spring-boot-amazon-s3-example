@@ -9,13 +9,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/files")
+@RequestMapping("/")
 public class FileHandlerController {
 
     @Autowired
     private AmazonS3ClientService amazonS3ClientService;
 
-    @PostMapping
+    @RequestMapping(method = RequestMethod.POST, value = "/upload")
     public Map<String, String> uploadFile(@RequestPart(value = "file") MultipartFile file)
     {
         this.amazonS3ClientService.uploadFileToS3Bucket(file, true);
@@ -26,7 +26,7 @@ public class FileHandlerController {
         return response;
     }
 
-    @DeleteMapping
+    @RequestMapping(method = RequestMethod.DELETE, value = "/delete")
     public Map<String, String> deleteFile(@RequestParam("file_name") String fileName)
     {
         this.amazonS3ClientService.deleteFileFromS3Bucket(fileName);
@@ -35,5 +35,11 @@ public class FileHandlerController {
         response.put("message", "file [" + fileName + "] removing request submitted successfully.");
 
         return response;
+    }
+    @RequestMapping("/")
+    public String welcomeMessage() {
+    	String name=  System.getenv("BUCKET_NAME");
+		return "Welcome to Service Broker Demo. Bucket Name is: "+name;
+    	
     }
 }

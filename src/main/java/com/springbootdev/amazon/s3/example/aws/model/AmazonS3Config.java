@@ -1,5 +1,6 @@
 package com.springbootdev.amazon.s3.example.aws.model;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -11,6 +12,7 @@ import com.amazonaws.regions.Regions;
 
 @Configuration
 public class AmazonS3Config {
+	
 	/*
 	 * @Value("${aws.access.key.id}") private String awsKeyId;
 	 * 
@@ -20,11 +22,14 @@ public class AmazonS3Config {
 	 * 
 	 * @Value("${aws.s3.audio.bucket}") private String awsS3AudioBucket;
 	 */
+	 	
 
-	private String awsKeyId = System.getenv("S3_AWS_ACCESS_KEY_ID");
-	private String awsKeySecret = System.getenv("S3_AWS_SECRET_ACCESS_KEY");
-	private String awsRegion = System.getenv("aws.region");
-	private String awsS3AudioBucket = System.getenv("BUCKET_NAME");
+	
+	  private String awsKeyId = System.getenv("S3_AWS_ACCESS_KEY_ID"); private
+	  String awsKeySecret = System.getenv("S3_AWS_SECRET_ACCESS_KEY"); private
+	  String awsRegion = System.getenv("aws.region"); private String
+	  awsS3AudioBucket = System.getenv("BUCKET_NAME");
+	 
 
 	@Bean(name = "awsKeyId")
 	public String getAWSKeyId() {
