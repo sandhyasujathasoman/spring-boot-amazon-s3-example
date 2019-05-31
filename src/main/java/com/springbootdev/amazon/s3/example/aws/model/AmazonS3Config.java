@@ -14,23 +14,23 @@ import com.amazonaws.regions.Regions;
 public class AmazonS3Config {
 	
 	
-	  @Value("${aws.access.key.id}") private String awsKeyId;
+	//  @Value("${aws.access.key.id}") private String awsKeyId;
 	  
-	  @Value("${aws.access.key.secret}") private String awsKeySecret;
+	//  @Value("${aws.access.key.secret}") private String awsKeySecret;
 	  
 	  @Value("${aws.region}") private String awsRegion;
 	 
-	  @Value("${aws.s3.audio.bucket}") private String awsS3AudioBucket;
+	//  @Value("${aws.s3.audio.bucket}") private String awsS3AudioBucket;
 	 
 	 	
 
 	
-	/*
-	 * private String awsKeyId = System.getenv("S3_AWS_ACCESS_KEY_ID"); private
-	 * String awsKeySecret = System.getenv("S3_AWS_SECRET_ACCESS_KEY"); private
-	 * String awsRegion = System.getenv("aws.region"); private String
-	 * awsS3AudioBucket = System.getenv("BUCKET_NAME");
-	 */
+	
+	 private String awsKeyId = System.getenv("S3_AWS_ACCESS_KEY_ID"); private
+	 String awsKeySecret = System.getenv("S3_AWS_SECRET_ACCESS_KEY"); 
+	// private String awsRegion = System.getenv("aws.region"); 
+	 private String awsS3AudioBucket = System.getenv("BUCKET_NAME");
+	 
 	 
 
 	@Bean(name = "awsKeyId")
