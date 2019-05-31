@@ -31,6 +31,7 @@ public class FileHandlerController {
     @RequestMapping(method = RequestMethod.DELETE, value = "/delete")
     public Map<String, String> deleteFile(@RequestParam("file_name") String fileName)
     {
+    	System.out.println("File name is: "+fileName);
         this.amazonS3ClientService.deleteFileFromS3Bucket(fileName);
 
         Map<String, String> response = new HashMap<>();
