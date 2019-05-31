@@ -8,11 +8,12 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.HashMap;
 import java.util.Map;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/")
 public class FileHandlerController {
 
-    @Autowired
+    @Autowired(required=true)
     private AmazonS3ClientService amazonS3ClientService;
 
     @RequestMapping(method = RequestMethod.POST, value = "/upload")

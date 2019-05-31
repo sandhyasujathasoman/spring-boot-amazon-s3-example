@@ -24,11 +24,11 @@ public class AmazonS3Config {
 	 */
 	 	
 
-	
+	  @Value("${aws.region}") private String awsRegion;
 	  private String awsKeyId = System.getenv("S3_AWS_ACCESS_KEY_ID"); private
-	  String awsKeySecret = System.getenv("S3_AWS_SECRET_ACCESS_KEY"); private
-	  String awsRegion = System.getenv("aws.region"); private String
-	  awsS3AudioBucket = System.getenv("BUCKET_NAME");
+	  String awsKeySecret = System.getenv("S3_AWS_SECRET_ACCESS_KEY"); 
+	 // private String awsRegion = System.getenv("aws.region"); 
+	  private String awsS3AudioBucket = System.getenv("BUCKET_NAME");
 	 
 
 	@Bean(name = "awsKeyId")
