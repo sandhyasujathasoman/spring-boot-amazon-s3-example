@@ -55,4 +55,9 @@ public class AmazonS3Config {
 	public String getAWSS3AudioBucket() {
 		return awsS3AudioBucket;
 	}
+	
+	public void printConfigs() {
+		System.out.println(" Bucket Name = " + awsS3AudioBucket);
+
+	}
 }
